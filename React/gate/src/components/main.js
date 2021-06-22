@@ -1,7 +1,9 @@
 import React from 'react';
 import './mainStyle.css';
-import Recognize from './Recognize.js'
+import Recognize from './Recognize.js';
 import Counter from './Counter.js';
+import Id from './Id.js';
+import Description from './Description.js';
 
 function Main(){
     return (
@@ -18,12 +20,8 @@ function Main(){
                     <div className="temchart"></div>
                 </div>
                 <div className="controller">
-                    <div className="id">
-
-                    </div>
-                    <div className="description">
-                        설명
-                    </div>
+                    <Id />
+                    <Description />
                     <button>관리자 호출</button>
                 </div>
             </div>

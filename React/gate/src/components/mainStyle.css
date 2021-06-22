@@ -79,22 +79,31 @@ body{
 .id{
     margin: 2vh 5vw;
     width: 30vw;
-    height: 7vh;
+    height: 10vh;
     background-color: rgb(243, 156, 18);
+    font-weight: bold;
+    font-size: 1.2rem;
+    color : #fff;
 }
+.id h3{
+    margin: 2vh;
+}
+
 .description{
-    margin: 2vh 5vw;
-    width: 30vw;
-    height: 7vh;
+    margin: 0 5vw;
+}
+.description h2, p{
+    margin: 0;
 }
 .controller button{
     margin: 2vh 5vw;
     width: 30vw;
-    height: 7vh;
+    height: 10vh;
     background-color: rgb(158, 158, 158);
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border-style: none;
+    font-weight: bold;
 }
 .controller button:hover{
     cursor: pointer;
