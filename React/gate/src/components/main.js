@@ -1,28 +1,27 @@
 import React from 'react';
-import './mainStyle.css'
+import './mainStyle.css';
+import Recognize from './Recognize.js'
+import Counter from './Counter.js';
 
-const Main = () => (
-    <div id="main">
-        <div class="contents">
-            <div class="cam">
-                <div class="recog">
-                    Face ID 인식중입니다...                    
-                </div>
-                <div class="camera"></div>
-                <div class="countdown">
-                    3
-                </div>
+function Main(){
+    return (
+        <div id="main">
+        <div className="contents">
+            <div className="cam">
+                <Recognize />
+                <div className="camera"></div>
+                <Counter />
             </div>
-            <div class="display">
-                <div class="temperature">
-                    <div class="temcam"></div>
-                    <div class="temchart"></div>
+            <div className="display">
+                <div className="temperature">
+                    <div className="temcam"></div>
+                    <div className="temchart"></div>
                 </div>
-                <div class="controller">
-                    <div class="id">
+                <div className="controller">
+                    <div className="id">
 
                     </div>
-                    <div class="description">
+                    <div className="description">
                         설명
                     </div>
                     <button>관리자 호출</button>
@@ -30,6 +29,7 @@ const Main = () => (
             </div>
         </div>
     </div>
-)
+    )
+}
 
 export default Main;
