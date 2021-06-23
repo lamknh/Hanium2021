@@ -3,12 +3,11 @@ import styled from 'styled-components';
 
 const IdBlock = styled.div`
     .id{
-        margin: 2vh 5vw;
+        margin: 2vh 5vw 0;
         width: 30vw;
         height: 7vh;
         background-color: rgb(243, 156, 18);
         font-weight: bold;
-        font-size: 1.1rem;
         color : #fff;
         border-radius: 10px;
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);

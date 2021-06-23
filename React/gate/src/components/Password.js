@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import NumberPad from './NumberPad';
 
 const PasswordBlock = styled.div`
     .contents{
@@ -16,16 +17,25 @@ const PasswordBlock = styled.div`
         border-radius: 10px;
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
     }
+
+    .title{
+        color: rgb(224, 224, 224);
+        width: 45vw;
+        margin: 10vw 0;
+        font-size : 1.2rem;
+    }
 `;
 
 const Password = () => {
     return (
         <PasswordBlock>
             <div className="contents">
-                
+                <div className="title">
+                    <h2>관리자 비밀번호 입력</h2>
+                </div>
+                <NumberPad />
             </div>
         </PasswordBlock>
-        
     );
 };
 

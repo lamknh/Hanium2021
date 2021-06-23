@@ -41,5 +41,9 @@
     font-size: 0.9rem;
     color : #fff;
     border-style: none;
+}
 
+#fail{
+  margin-left : 1vw;
+  background-color: rgb(33, 33, 33);
 }
