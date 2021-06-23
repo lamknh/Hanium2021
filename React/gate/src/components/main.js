@@ -9,6 +9,7 @@ import Counter from './Counter.js';
 import Id from './Id.js';
 import Description from './Description.js';
 import Password from './Password.js';
+import Modal from './Modal';
 
 import './Modal.css'
 
@@ -39,8 +40,8 @@ const MainBlock = styled.div`
     }
     .camera{
         margin: 0 auto;
-        width: 400px;
-        height: 400px;
+        width: 300px;
+        height: 300px;
         background-color: #000;
     }
 
@@ -60,14 +61,14 @@ const MainBlock = styled.div`
     }
     .temcam{
         margin: auto 2vh auto auto;
-        width: 300px;
-        height: 300px;
+        width: 200px;
+        height: 200px;
         background-color: #000;
     }
     .temchart{
         margin: auto;
-        width: 50px;
-        height: 300px;
+        width: 40px;
+        height: 200px;
         background-color: #000;
     }
 
@@ -82,7 +83,7 @@ const MainBlock = styled.div`
     }
 
     .controller button{
-        margin: 2vh 5vw;
+        margin: 1vh 5vw;
         width: 30vw;
         height: 7vh;
         background-color: rgb(158, 158, 158);
@@ -98,40 +99,6 @@ const MainBlock = styled.div`
     }
 `;
 function Main(){
-    const Modal = () => (
-        <Popup
-            trigger={<button className="button"> 관리자 호출 </button>}
-            modal
-            nested
-        >
-        {close => (
-            <div className="modal">
-                <button className="close" onClick={close}>
-                &times;
-                </button>
-                <div className="header"> 관리자 호출 </div>
-                <div className="content">
-                {' '}
-                관리자를 호출하였습니다.
-                </div>
-                <div className="actions">
-                <Link to='/pwd'>
-                <button
-                    className="button"
-                    onClick={() => {
-                    console.log('modal closed ');
-                    close();
-                    }}
-                >
-                    잠시만 기다려주세요
-                </button>
-                </Link>
-                </div>
-            </div>
-            )}
-        </Popup>
-      );
-
     return (
         <MainBlock>
             <div id="main">

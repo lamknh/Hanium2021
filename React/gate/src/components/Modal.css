@@ -35,10 +35,10 @@
   }
 .button {
     background-color : rgb(52, 152, 219);
-    height: 6vh;
+    height: 7vh;
     width: 20vw;
     border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color : #fff;
     border-style: none;
 
