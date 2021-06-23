@@ -10,6 +10,8 @@ import Id from './Id.js';
 import Description from './Description.js';
 import Password from './Password.js';
 
+import './Modal.css'
+
 const MainBlock = styled.div`
     .contents{
         position: absolute;
@@ -96,35 +98,63 @@ const MainBlock = styled.div`
     }
 `;
 function Main(){
-    const PopupExample = () => (
-        <Popup trigger={<button> Trigger</button>} position="right center">
-          <div>Popup content here !!</div>
+    const Modal = () => (
+        <Popup
+            trigger={<button className="button"> 관리자 호출 </button>}
+            modal
+            nested
+        >
+        {close => (
+            <div className="modal">
+                <button className="close" onClick={close}>
+                &times;
+                </button>
+                <div className="header"> 관리자 호출 </div>
+                <div className="content">
+                {' '}
+                관리자를 호출하였습니다.
+                </div>
+                <div className="actions">
+                <Link to='/pwd'>
+                <button
+                    className="button"
+                    onClick={() => {
+                    console.log('modal closed ');
+                    close();
+                    }}
+                >
+                    잠시만 기다려주세요
+                </button>
+                </Link>
+                </div>
+            </div>
+            )}
         </Popup>
       );
 
     return (
         <MainBlock>
-                <div id="main">
-                    <div className="contents">
-                        <div className="cam">
-                            <Recognize />
-                            <div className="camera"></div>
-                            <Counter />
+            <div id="main">
+                <div className="contents">
+                    <div className="cam">
+                        <Recognize />
+                        <div className="camera"></div>
+                        <Counter />
+                    </div>
+                    <div className="display">
+                        <div className="temperature">
+                            <div className="temcam"></div>
+                            <div className="temchart"></div>
                         </div>
-                        <div className="display">
-                            <div className="temperature">
-                                <div className="temcam"></div>
-                                <div className="temchart"></div>
-                            </div>
-                            <div className="controller">
-                                <Id />
-                                <Description />
-                                <Link to='/pwd'><button>관리자 호출</button></Link>
-                            </div>
+                        <div className="controller">
+                            <Id />
+                            <Description />
+                            <Modal/>
                         </div>
                     </div>
-                    <Route path="/pwd" component={Password} />
                 </div>
+                <Route path="/pwd" component={Password} />
+            </div>
         </MainBlock>
     )
 }
