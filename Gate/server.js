@@ -24,6 +24,6 @@ app.get('/', (req, res) => {
 var server = https.createServer(options, app);
 
 server.listen(port, () => {
-  console.log("server starting on port : " + port)
+  console.log("https://localhost:" + port)
 });
 
