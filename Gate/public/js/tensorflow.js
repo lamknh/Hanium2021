@@ -54,7 +54,7 @@ async function predict() {
             maxno = i;
         }
         const classPrediction = prediction[i].className + " : " + prediction[i].probability.toFixed(2);
-        console.log(classPrediction); // 인식 값 콘솔 출력
+        //console.log(classPrediction); // 인식 값 콘솔 출력
     }
     //$(".description").hide();
     if(prediction[maxno].probability >= 0.90){
