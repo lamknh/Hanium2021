@@ -68,7 +68,6 @@ async function predict() {
         $(".temperature").text("36.5");
         $(".date").text(date);
         cnt++;
-        console.log(cnt);
         if(cnt >= 80){
             location.reload();
             cnt = 0;
