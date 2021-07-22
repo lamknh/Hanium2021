@@ -5,7 +5,7 @@
 //const URL = "./my_model/";
 const URL = "https://teachablemachine.withgoogle.com/models/Y_ncV5wTw/";
 
-let model, webcam, labelContainer, maxPredictions;
+let model, webcam, labelContainer, maxPredictions, cnt = 0;
 
 // Load the image model and setup the webcam
 async function init() {
@@ -56,8 +56,8 @@ async function predict() {
         const classPrediction = prediction[i].className + " : " + prediction[i].probability.toFixed(2);
         //console.log(classPrediction); // 인식 값 콘솔 출력
     }
-    //$(".description").hide();
-    if(prediction[maxno].probability >= 0.90){
+
+    if(prediction[maxno].probability >= 0.95){
         const classPrediction = prediction[maxno].className + "<br>" + prediction[maxno].probability.toFixed(2) * 100 + "%";
         labelContainer.innerHTML = classPrediction;
         document.body.style.backgroundColor = "#27ae60";        
@@ -67,6 +67,12 @@ async function predict() {
         $(".temperature").show();
         $(".temperature").text("36.5");
         $(".date").text(date);
+        cnt++;
+        console.log(cnt);
+        if(cnt >= 80){
+            location.reload();
+            cnt = 0;
+        }
     } else{
         $(".date").hide();
         $(".temperature").hide();
