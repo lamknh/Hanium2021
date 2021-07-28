@@ -71,6 +71,7 @@ async function predict() {
         if(cnt >= 80){
             location.reload();
             cnt = 0;
+            
         }
     } else{
         $(".date").hide();
@@ -85,3 +86,8 @@ async function predict() {
 $(document).ready( function () {
     init();
 });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     fetch('https://localhost:3000/getData')
+//     .then(response => response.json())
+// })
