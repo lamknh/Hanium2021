@@ -1,10 +1,10 @@
 const express = require('express');
 const router =  express.Router();
 
-const dbService = require('../../DbService');
+const DbService = require('../../DbService');
 const userController = require('../controllers/userController');
 
-router.get('', (req, res) => {
+router.get('/', (req, res, next) => {
     res.render('index');
  });
 
@@ -37,12 +37,19 @@ router.post('/update', (req, res) => {
 });
 
 //read - temperature
-router.get('/getData', (req, res) => {
-    const db = dbService.getDbServiceInstance();
-    const result = db.getData();
-    console.log(result);
-    return result;
+router.get('/getData', async (req, res, next) => {
+    try{
+        //const db = dbService.getDbServiceInstance();
+        let result = await DbService.all();
+        res.json(result);
+        console.log(result);
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
     
+    
+    return result;
 });
 
 //update

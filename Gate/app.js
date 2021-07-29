@@ -4,8 +4,6 @@ const fs = require('fs');
 
 require('dotenv').config();
 
-const dbService = require('./DbService');
-
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
@@ -40,41 +38,3 @@ server.listen(port, () => {
   console.log("https://localhost:" + port)
 });
 
-
-let users = [
-    {
-        id : 1,
-        name : "A",
-        temperature : 37.5
-    },
-    {
-        id : 2,
-        name : "B",
-        temperature : 37.0
-    },
-    {
-        id : 3,
-        name : "C",
-        temperature : 36.5
-    }
-]
-
-app.get('/users', (req, res) => {
-    return res.json(users[0]);
-});
-
-//create - id, name, time, temperature
-app.post('/update', (req, res) => {
-
-});
-
-//read - temperature
-app.get('/getData', (req, res) => {
-    const db = dbService.getDbServiceInstance();
-    const result = db.getData();
-    console.log(result);
-    return result;
-    
-});
-
-//update

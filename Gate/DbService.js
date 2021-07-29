@@ -2,7 +2,7 @@ var mysql = require("mysql");
 let instance = null;
 require('dotenv').config();
 
-var db = mysql.createConnection({
+const pool = mysql.createConnection({
     // host: config.mysql.host,
     // user: config.mysql.user,
     // password: config.mysql.password,
@@ -13,35 +13,51 @@ var db = mysql.createConnection({
     database : process.env.DB
 });
 
-db.connect(function(err){
-    if(err){ 
-        throw err; 
-    }else{
-        console.log("db " + db.state);
-    }
-});
+let db = {};
 
-class DbService {
-    static getDbServiceInstance(){
-        return instance ? instance : new DbService();
-    }
+// db.connect(function(err){
+//     if(err){ 
+//         throw err; 
+//     }else{
+//         console.log("db " + db.state);
+//     }
+// });
 
-    async getData(){
-        try{
-            const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM ENTRY_RECORD;"; // where id = ?;
-
-                db.query(query, (err, results) => {
-                    if(err) reject (new Error(err.message));
-                    resolve(results);
-                })
-            }); // [id]
-            //console.log(response);
-            return response;
-        } catch (err){
-            throw err;
-        }
-    }
+db.all = () => {
+    return new Promise((resolve, rejct) => {
+        pool.query(`SELECT * FROM ENTRY_RECORD`, (err, results) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(results);    
+        })
+    })
 }
 
-module.exports = DbService;
+// class DbService {
+//     static getDbServiceInstance(){
+//         return instance ? instance : new DbService();
+//     }
+
+//     async getData(){
+//         try{
+//             const response = await new Promise((resolve, reject) => {
+//                 const query = "SELECT * FROM ENTRY_RECORD"; // where id = ?;
+
+//                 db.query(query, (err, results) => {
+//                     if(err){
+//                         reject (new Error(err.message));
+//                     }
+//                     return resolve(results);
+                    
+//                 })
+//             }); // [id]
+//             //console.log(response);
+//             //return response;
+//         } catch (err){
+//             throw err;
+//         }
+//     }
+// }
+
+module.exports = db;
