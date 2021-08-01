@@ -39,7 +39,6 @@ router.post('/update', (req, res) => {
 //read - temperature
 router.get('/getData', async (req, res, next) => {
     try{
-        //const db = dbService.getDbServiceInstance();
         let result = await DbService.all();
         res.json(result);
         console.log(result);
@@ -52,7 +51,20 @@ router.get('/getData', async (req, res, next) => {
     return result;
 });
 
-//update
+router.get('/getData:id', async (req, res, next) => {
+    try{
+        let result = await DbService.one();
+        res.json(result);
+        console.log(result);
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+    
+    
+    return result;
+});
+
 
 
  module.exports = router;

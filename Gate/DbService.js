@@ -34,30 +34,15 @@ db.all = () => {
     })
 }
 
-// class DbService {
-//     static getDbServiceInstance(){
-//         return instance ? instance : new DbService();
-//     }
-
-//     async getData(){
-//         try{
-//             const response = await new Promise((resolve, reject) => {
-//                 const query = "SELECT * FROM ENTRY_RECORD"; // where id = ?;
-
-//                 db.query(query, (err, results) => {
-//                     if(err){
-//                         reject (new Error(err.message));
-//                     }
-//                     return resolve(results);
-                    
-//                 })
-//             }); // [id]
-//             //console.log(response);
-//             //return response;
-//         } catch (err){
-//             throw err;
-//         }
-//     }
-// }
+db.one = (id) => {
+    return new Promise((resolve, rejct) => {
+        pool.query(`SELECT * FROM ENTRY_RECORD WHERE id = ?`, [id], (err, results) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(results[0]);    
+        })
+    })
+}
 
 module.exports = db;
