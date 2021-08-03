@@ -59,9 +59,10 @@ router.get('/getData', async (req, res, next) => {
 });
 
 router.get('/getData/:id', async (req, res, next) => {
+    let result;
     try{
-        console.log(id);
-        let result = await DbService.one(req.params.id); //url 파라미터 정보 조회
+        result = await DbService.one(req.params.id); //url 파라미터 정보 조회
+        //console.log(req.params.id);
         res.json(result);
         console.log(result);
     } catch(e){
@@ -71,6 +72,11 @@ router.get('/getData/:id', async (req, res, next) => {
     return result;
 });
 
-
+// router.get('/users/:id', (req, res) => {
+//     let result = users.find(u => u.id === parseInt(req.params.id));
+//     if (!users) res.status(404).send(`ID was not found`);
+//     res.send(result);
+//     return result;
+// });
 
  module.exports = router;
