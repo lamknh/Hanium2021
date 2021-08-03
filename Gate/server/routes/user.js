@@ -4,6 +4,8 @@ const router =  express.Router();
 const DbService = require('../../DbService');
 const userController = require('../controllers/userController');
 
+let result;
+
 router.get('/', (req, res, next) => {
     res.render('index');
  });
@@ -32,7 +34,7 @@ router.get('/users', (req, res) => {
 });
 
 router.get('/users/:id', (req, res) => {
-    let result = users.find(u => u.id === parseInt(req.params.id));
+    result = users.find(u => u.id === parseInt(req.params.id));
     if (!users) res.status(404).send(`ID was not found`);
     res.send(result);
     return result;
@@ -46,7 +48,7 @@ router.post('/update', (req, res) => {
 //read - temperature
 router.get('/getData', async (req, res, next) => {
     try{
-        let result = await DbService.all();
+        result = await DbService.all();
         res.json(result);
         console.log(result);
     } catch(e){
@@ -59,7 +61,6 @@ router.get('/getData', async (req, res, next) => {
 });
 
 router.get('/getData/:id', async (req, res, next) => {
-    let result;
     try{
         result = await DbService.one(req.params.id); //url 파라미터 정보 조회
         //console.log(req.params.id);
@@ -71,12 +72,5 @@ router.get('/getData/:id', async (req, res, next) => {
     }
     return result;
 });
-
-// router.get('/users/:id', (req, res) => {
-//     let result = users.find(u => u.id === parseInt(req.params.id));
-//     if (!users) res.status(404).send(`ID was not found`);
-//     res.send(result);
-//     return result;
-// });
 
  module.exports = router;
