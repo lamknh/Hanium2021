@@ -35,7 +35,7 @@ db.all = () => {
 }
 
 db.one = (id) => {
-    return new Promise((resolve, rejct) => {
+    return new Promise((resolve, reject) => {
         pool.query(`SELECT * FROM ENTRY_RECORD WHERE id = ?`, [id], (err, results) => {
             if(err){
                 return reject(err);
