@@ -13,24 +13,24 @@ router.get('/', (req, res, next) => {
  
 let users = [
     {
-        id : 1,
+        id : 0,
         name : "A",
         temperature : 37.5
     },
     {
-        id : 2,
+        id : 1,
         name : "B",
         temperature : 37.0
     },
     {
-        id : 3,
+        id : 2,
         name : "C",
         temperature : 36.5
     }
 ]
 
 router.get('/users', (req, res) => {
-    return res.json(users[0]);
+    return res.json(users);
 });
 
 router.get('/users/:id', (req, res) => {

@@ -45,4 +45,10 @@ db.one = (id) => {
     })
 }
 
+db.post = () => {
+    return new Promise((resolve, reject) => {
+        pool.query(`INSERT INTO `)
+    })
+}
+
 module.exports = db;

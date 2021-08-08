@@ -1,3 +1,24 @@
+function getData(id, prediction) {
+    let idContainer = $('#label-container');
+    let temp = $('.temperature');
+
+    $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: "https://127.0.0.1:3000/users/" + id,
+        //contentType: "application/json",
+        success: function(jd){
+            let item = jd;
+            idContainer.html(`${item.name}<br>${prediction}%`);
+            temp.html(`${item.temperature}`);
+            console.log(item.name, prediction, item.temperature);
+        },
+        error: function(request, status, error){
+            console.log("DB ajax Error: " + error);
+        }
+    })
+}
+
 // More API functions here:
 // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
@@ -58,21 +79,21 @@ async function predict() {
     }
 
     if(prediction[maxno].probability >= 0.95){
-        const classPrediction = prediction[maxno].className + "<br>" + prediction[maxno].probability.toFixed(2) * 100 + "%";
-        labelContainer.innerHTML = classPrediction;
+        // const classPrediction = prediction[maxno].className + "<br>" + prediction[maxno].probability.toFixed(2) * 100 + "%";
+        // labelContainer.innerHTML = classPrediction;
+        getData(maxno, prediction[maxno].probability.toFixed(2) * 100);
         document.body.style.backgroundColor = "#27ae60";        
         $("#label-container").show();
         $(".description").hide();
         $(".date").show();
         $(".temperature").show();
-        $(".temperature").text("36.5");
+        //$(".temperature").text("36.5");
         $(".date").text(date);
         cnt++;
-        if(cnt >= 80){
-            location.reload();
-            cnt = 0;
-            
-        }
+        // if(cnt >= 80){
+        //     location.reload();
+        //     cnt = 0;
+        // }
     } else{
         $(".date").hide();
         $(".temperature").hide();
