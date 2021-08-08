@@ -90,10 +90,10 @@ async function predict() {
         //$(".temperature").text("36.5");
         $(".date").text(date);
         cnt++;
-        // if(cnt >= 80){
-        //     location.reload();
-        //     cnt = 0;
-        // }
+        if(cnt >= 80){
+            location.reload();
+            cnt = 0;
+        }
     } else{
         $(".date").hide();
         $(".temperature").hide();
@@ -107,8 +107,3 @@ async function predict() {
 $(document).ready( function () {
     init();
 });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     fetch('https://localhost:3000/getData')
-//     .then(response => response.json())
-// })
