@@ -40,11 +40,6 @@ router.get('/users/:id', (req, res) => {
     return result;
 });
 
-//create - id, name, time, temperature
-router.post('/update', (req, res) => {
-
-});
-
 //read - temperature
 router.get('/getData', async (req, res, next) => {
     try{
@@ -55,12 +50,10 @@ router.get('/getData', async (req, res, next) => {
         console.log(e);
         res.sendStatus(500);
     }
-    
-    
     return result;
 });
 
-router.get('/getData/:id', async (req, res, next) => {
+router.get('/user/:id', async (req, res, next) => {
     try{
         result = await DbService.one(req.params.id); //url 파라미터 정보 조회
         //console.log(req.params.id);
@@ -71,6 +64,24 @@ router.get('/getData/:id', async (req, res, next) => {
         res.sendStatus(500);
     }
     return result;
+});
+
+router.get('/temp/:id', async (req, res, next) => {
+    try{
+        result = await DbService.tem(req.params.id); //url 파라미터 정보 조회
+        //console.log(req.params.id);
+        res.json(result);
+        console.log(result);
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+    return result;
+})
+
+//create - id, name, time, temperature
+router.post('/post/:id/:name/:time/:temperature', (req, res) => {
+    
 });
 
  module.exports = router;

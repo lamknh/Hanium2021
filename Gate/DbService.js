@@ -3,10 +3,6 @@ let instance = null;
 require('dotenv').config();
 
 const pool = mysql.createConnection({
-    // host: config.mysql.host,
-    // user: config.mysql.user,
-    // password: config.mysql.password,
-    // database: config.mysql.database
     host    : process.env.DB_HOST,
     user    : process.env.DB_USER,
     password : process.env.DB_PASS,
@@ -15,17 +11,9 @@ const pool = mysql.createConnection({
 
 let db = {};
 
-// db.connect(function(err){
-//     if(err){ 
-//         throw err; 
-//     }else{
-//         console.log("db " + db.state);
-//     }
-// });
-
 db.all = () => {
     return new Promise((resolve, rejct) => {
-        pool.query(`SELECT * FROM ENTRY_RECORD`, (err, results) => {
+        pool.query(`SELECT * FROM USERS`, (err, results) => {
             if(err){
                 return reject(err);
             }
@@ -36,18 +24,23 @@ db.all = () => {
 
 db.one = (id) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM ENTRY_RECORD WHERE id = ?`, [id], (err, results) => {
+        pool.query(`SELECT * FROM USERS WHERE id = ?`, [id], (err, results) => {
             if(err){
                 return reject(err);
             }
-            return resolve(results[0]);    
+            return resolve(results[0]);
         })
     })
 }
 
-db.post = () => {
+db.tem = (id) => {
     return new Promise((resolve, reject) => {
-        pool.query(`INSERT INTO `)
+        pool.query(`SELECT * FROM TEMP WHERE id = ?`, [id], (err, results) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(results[0]);
+        })
     })
 }
 

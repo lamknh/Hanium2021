@@ -1,16 +1,16 @@
 function getData(id, prediction) {
     let idContainer = $('#label-container');
-    let temp = $('.temperature');
+    let tem = $('.temperature');
 
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: "https://127.0.0.1:3000/users/" + id,
-        //contentType: "application/json",
+        contentType: "application/json",
         success: function(jd){
             let item = jd;
             idContainer.html(`${item.name}<br>${prediction}%`);
-            temp.html(`${item.temperature}`);
+            tem.html(`${item.temperature}`);
             console.log(item.name, prediction, item.temperature);
         },
         error: function(request, status, error){
