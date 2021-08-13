@@ -120,7 +120,8 @@ async function predict() {
         document.body.style.backgroundColor = "#e74c3c";
 
         $(".contents").click(function () {
-            
+            console.log("clicked");
+            location.reload();
         })
     }
 }
