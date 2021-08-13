@@ -2,6 +2,8 @@ function getData(id, prediction) {
     let idContainer = $('#label-container');
     let tem = $('.temperature');
 
+    var temperature = 36.578;
+    
     $.ajax({
         type: "GET",
         dataType: "JSON",
@@ -10,11 +12,26 @@ function getData(id, prediction) {
         success: function(jd){
             let item = jd;
             idContainer.html(`${item.name}<br>${prediction}%`);
-            tem.html(`${item.temperature}`);
+            tem.html(`${temperature}`);
             console.log(item.name, prediction, item.temperature);
         },
         error: function(request, status, error){
-            console.log("DB ajax Error: " + error);
+            console.log("DB ajax get Error: " + error);
+        }
+    })
+}
+
+function postDB(id, gate_num){
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: "https://127.0.0.1:3000/post/" + id + "/" + gate_num,
+        contentType: "application/json",
+        success: function(jd){
+            console.log("post success");
+        },
+        error: function(request, status, error){
+            console.log("DB ajax post Error: " + error);
         }
     })
 }
@@ -87,11 +104,11 @@ async function predict() {
         $(".description").hide();
         $(".date").show();
         $(".temperature").show();
-        //$(".temperature").text("36.5");
         $(".date").text(date);
         cnt++;
-        if(cnt >= 80){
+        if(cnt >= 30){
             location.reload();
+            postDB(maxno, "2F"); // 게이트 번호
             cnt = 0;
         }
     } else{
@@ -101,6 +118,10 @@ async function predict() {
         $(".description").show();
         $(".description").css("padding","8vh 0 0 0");
         document.body.style.backgroundColor = "#e74c3c";
+
+        $(".contents").click(function () {
+            
+        })
     }
 }
 
