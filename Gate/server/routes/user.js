@@ -14,18 +14,15 @@ router.get('/', (req, res, next) => {
 let users = [
     {
         id : 0,
-        name : "A",
-        temperature : 37.5
+        name : "A"
     },
     {
         id : 1,
-        name : "B",
-        temperature : 37.0
+        name : "B"
     },
     {
         id : 2,
-        name : "C",
-        temperature : 36.5
+        name : "C"
     }
 ]
 
@@ -44,6 +41,18 @@ router.get('/users/:id', (req, res) => {
 router.get('/getData', async (req, res, next) => {
     try{
         result = await DbService.all();
+        res.json(result);
+        console.log(result);
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+    return result;
+});
+
+router.get('/getEntry', async (req, res, next) => {
+    try{
+        result = await DbService.entry();
         res.json(result);
         console.log(result);
     } catch(e){
@@ -80,8 +89,16 @@ router.get('/temp/:id', async (req, res, next) => {
 })
 
 //create - id, name, time, temperature
-router.post('/post/:id/:name/:time/:temperature', (req, res) => {
-    
+router.post('/post/:id/:gate', (req, res) => {
+    try{
+        result = DbService.post(req.params.id, req.params.gate); //url 파라미터 정보 조회
+        res.json(result);
+        console.log(result);
+    } catch(e){
+        console.log(e);
+        res.sendStatus(500);
+    }
+    return result;
 });
 
  module.exports = router;
