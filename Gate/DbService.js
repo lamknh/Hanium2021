@@ -44,4 +44,26 @@ db.tem = (id) => {
     })
 }
 
+db.post = (id, gate_num) => {
+    return new Promise((resolve, reject) => {
+        pool.query(`INSERT INTO ENTRY_RECORD VALUES(?, ?, now())`, [id, gate_num], (err, results) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(results[0]);
+        })
+    })
+}
+
+db.entry = () => {
+    return new Promise((resolve, rejct) => {
+        pool.query(`SELECT * FROM ENTRY_RECORD`, (err, results) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(results);    
+        })
+    })
+}
+
 module.exports = db;
