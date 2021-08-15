@@ -10,7 +10,15 @@ router.get('/', (req, res, next) => {
     res.render('index');
  });
 
- 
+router.get('/1F/', (req, res, next) => {
+    res.render('index_1f');
+})
+
+router.get('/2F/', (req, res, next) => {
+    res.render('index_2f');
+})
+
+
 let users = [
     {
         id : 0,

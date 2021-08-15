@@ -6,14 +6,16 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
    <link rel="stylesheet" href="/css/style.css">
-   <link rel="stylesheet" href="/css/indexStyle.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <title>Gate</title>
 </head>
 <body>
+    <script type="text/javascript" src="/js/tensorflow_1f.js"></script>
     <div id="main">
         <div class="contents">
-            
+            <div class="cam">
+                <div id="webcam-container"></div>
+            </div>
             <div class="display">
                 <div class="id">
                     <div id="label-container">
@@ -22,11 +24,7 @@
                 <div class="temperature"></div>
                 <div class="date"></div>
                 <div class="description">
-                    <h1>스마트 <br>스피드 게이트</h1>
-                    <div class="buttons">
-                        <a href ="./1F"><button>1F</button></a>
-                        <a href ="./2F"><button>2F</button></a>
-                    </div>
+                    <h1>1F Face ID<br>인식중</h1>
                 </div>
             </div> 
         </div>

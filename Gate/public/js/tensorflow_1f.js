@@ -3,6 +3,21 @@ function getData(id, prediction) {
     let tem = $('.temperature');
 
     var temperature = 36.578;
+
+    // $.ajax({
+    //     type: "GET",
+    //     dataType: "JSON",
+    //     url: "https://127.0.0.1:3000/temp/" + id,
+    //     contentType: "application/json",
+    //     success: function(jd){
+    //         let item = jd;
+    //         tem.html(`${item.temperature}`);
+    //         console.log(item.name, item.temperature);
+    //     },
+    //     error: function(request, status, error){
+    //         console.log("DB ajax temperature get Error: " + error);
+    //     }
+    // });
     
     $.ajax({
         type: "GET",
@@ -13,7 +28,7 @@ function getData(id, prediction) {
             let item = jd;
             idContainer.html(`${item.name}<br>${prediction}%`);
             tem.html(`${temperature}`);
-            console.log(item.name, prediction, item.temperature);
+            console.log(item.name, prediction);
         },
         error: function(request, status, error){
             console.log("DB ajax get Error: " + error);
@@ -75,9 +90,9 @@ async function loop() {
     await predict();
     
     window.requestAnimationFrame(loop);
-   }
+}
 
-   // run the webcam image through the image model
+// run the webcam image through the image model
 async function predict() {
     // predict can take in an image, video or canvas html element
     const prediction = await model.predict(webcam.canvas);
@@ -108,7 +123,7 @@ async function predict() {
         cnt++;
         if(cnt >= 30){
             location.reload();
-            postDB(maxno, "2F"); // 게이트 번호
+            postDB(maxno, "1F"); // 게이트 번호
             cnt = 0;
         }
     } else{
