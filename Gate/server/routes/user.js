@@ -18,6 +18,14 @@ router.get('/2F/', (req, res, next) => {
     res.render('index_2f');
 })
 
+router.get('/3F/', (req, res, next) => {
+    res.render('index_3f');
+})
+
+router.get('/4F/', (req, res, next) => {
+    res.render('index_4f');
+})
+
 
 let users = [
     {
