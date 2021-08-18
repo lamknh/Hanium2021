@@ -26,22 +26,6 @@ router.get('/4F/', (req, res, next) => {
     res.render('index_4f');
 })
 
-
-let users = [
-    {
-        id : 0,
-        name : "A"
-    },
-    {
-        id : 1,
-        name : "B"
-    },
-    {
-        id : 2,
-        name : "C"
-    }
-]
-
 router.get('/users', (req, res) => {
     return res.json(users);
 });
@@ -105,9 +89,9 @@ router.get('/temp/:id', async (req, res, next) => {
 })
 
 //create - id, name, time, temperature
-router.post('/post/:id/:gate', (req, res) => {
+router.post('/post/:id/:gate/:temperature', (req, res) => {
     try{
-        result = DbService.post(req.params.id, req.params.gate); //url 파라미터 정보 조회
+        result = DbService.post(req.params.id, req.params.gate, req.params.temperature); //url 파라미터 정보 조회
         res.json(result);
         console.log(result);
     } catch(e){

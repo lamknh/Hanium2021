@@ -12,7 +12,7 @@ const pool = mysql.createConnection({
 let db = {};
 
 db.all = () => {
-    return new Promise((resolve, rejct) => {
+    return new Promise((resolve, reject) => {
         pool.query(`SELECT * FROM USERS`, (err, results) => {
             if(err){
                 return reject(err);
@@ -33,20 +33,20 @@ db.one = (id) => {
     })
 }
 
-db.tem = (id) => {
+db.tem = (floor) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM TEMP WHERE id = ?`, [id], (err, results) => {
+        pool.query(`SELECT * FROM TEMP WHERE FLOOR = ?`, [floor], (err, results) => {
             if(err){
                 return reject(err);
             }
             return resolve(results[0]);
         })
-    })
+    })  
 }
 
-db.post = (id, gate_num) => {
+db.post = (id, gate_num, temperature) => {
     return new Promise((resolve, reject) => {
-        pool.query(`INSERT INTO ENTRY_RECORD VALUES(?, ?, now())`, [id, gate_num], (err, results) => {
+        pool.query(`INSERT INTO ENTRY_RECORD VALUES(?, ?, now(), ?)`, [id, gate_num, temperature], (err, results) => {
             if(err){
                 return reject(err);
             }
@@ -56,7 +56,7 @@ db.post = (id, gate_num) => {
 }
 
 db.entry = () => {
-    return new Promise((resolve, rejct) => {
+    return new Promise((resolve, reject) => {
         pool.query(`SELECT * FROM ENTRY_RECORD`, (err, results) => {
             if(err){
                 return reject(err);

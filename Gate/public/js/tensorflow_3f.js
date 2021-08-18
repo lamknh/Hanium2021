@@ -1,34 +1,35 @@
+var temperature;
+let floor = "3";
+
 function getData(id, prediction) {
     let idContainer = $('#label-container');
     let tem = $('.temperature');
 
-    var temperature = 36.578;
-
-    // $.ajax({
-    //     type: "GET",
-    //     dataType: "JSON",
-    //     url: "https://127.0.0.1:3000/temp/" + id,
-    //     contentType: "application/json",
-    //     success: function(jd){
-    //         let item = jd;
-    //         tem.html(`${item.temperature}`);
-    //         console.log(item.name, item.temperature);
-    //     },
-    //     error: function(request, status, error){
-    //         console.log("DB ajax temperature get Error: " + error);
-    //     }
-    // });
+    $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: "https://127.0.0.1:3000/temp/" + floor,
+        contentType: "application/json",
+        success: function(jd){
+            let item = jd;
+            tem.html(`${item.TEMPERATURE}`);
+            temperature = item.TEMPERATURE;
+            //console.log("1F : " + item.TEMPERATURE);
+        },
+        error: function(request, status, error){
+            console.log("DB ajax temperature get Error: " + error);
+        }
+    });
     
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: "https://127.0.0.1:3000/users/" + id,
+        url: "https://127.0.0.1:3000/user/" + id,
         contentType: "application/json",
         success: function(jd){
             let item = jd;
-            idContainer.html(`${item.name}<br>${prediction}%`);
-            tem.html(`${temperature}`);
-            console.log(item.name, prediction);
+            idContainer.html(`${item.EMP_NAME}<br>${prediction}%`);
+            //console.log(item.EMP_NAME, prediction);
         },
         error: function(request, status, error){
             console.log("DB ajax get Error: " + error);
@@ -36,11 +37,11 @@ function getData(id, prediction) {
     })
 }
 
-function postDB(id, gate_num){
+function postDB(id, gate_num, temperature){
     $.ajax({
         type: "POST",
         dataType: "JSON",
-        url: "https://127.0.0.1:3000/post/" + id + "/" + gate_num,
+        url: "https://127.0.0.1:3000/post/" + id + "/" + gate_num + "/" + temperature,
         contentType: "application/json",
         success: function(jd){
             console.log("post success");
@@ -109,7 +110,7 @@ async function predict() {
         const classPrediction = prediction[i].className + " : " + prediction[i].probability.toFixed(2);
         //console.log(classPrediction); // 인식 값 콘솔 출력
     }
-
+    
     if(prediction[maxno].probability >= 0.95){
         // const classPrediction = prediction[maxno].className + "<br>" + prediction[maxno].probability.toFixed(2) * 100 + "%";
         // labelContainer.innerHTML = classPrediction;
@@ -121,9 +122,10 @@ async function predict() {
         $(".temperature").show();
         $(".date").text(date);
         cnt++;
+        console.log(temperature);
         if(cnt >= 30){
             location.reload();
-            postDB(maxno, "3F"); // 게이트 번호
+            postDB(maxno, floor, temperature);
             cnt = 0;
         }
     } else{
