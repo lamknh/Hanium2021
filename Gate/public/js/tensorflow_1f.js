@@ -4,6 +4,7 @@ let floor = "1";
 function getData(id, prediction) {
     let idContainer = $('#label-container');
     let tem = $('.temperature');
+    const failMessage = "체온 정상범위 초과";
 
     $.ajax({
         type: "GET",
@@ -15,6 +16,15 @@ function getData(id, prediction) {
             tem.html(`${item.TEMPERATURE}`);
             temperature = item.TEMPERATURE;
             //console.log("1F : " + item.TEMPERATURE);
+            if(temperature > 37.5){ //35 ~ 40
+                $(".description h1").html(failMessage);
+                $(".date").hide();
+                $(".temperature").hide();
+                $("#label-container").hide();
+                $(".description").show();
+                $(".description").css("padding","8vh 0 0 0");
+                document.body.style.backgroundColor = "#e74c3c";
+            }
         },
         error: function(request, status, error){
             console.log("DB ajax temperature get Error: " + error);
