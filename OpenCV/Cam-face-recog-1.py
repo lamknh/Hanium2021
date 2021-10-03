@@ -8,7 +8,7 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 
 # 이미지 불러오기
-cap = cv2.VideoCapture('mask-23.mp4')
+cap = cv2.VideoCapture('mask.mp4')
 fps = cap.get(cv2.CAP_PROP_FPS)
 
 cou = 0
@@ -33,7 +33,7 @@ while (True):
             a = 24
             b = 3
             cv2.rectangle(img, (x-b, y-a), (x + w + b, y + h + a), (255, 0, 0), 2)
-            \
+
             # 눈 찾기
             #roi_color = img[y:y + h, x:x + w]
             #roi_gray = gray[y:y + h, x:x + w]
@@ -44,7 +44,7 @@ while (True):
             face = img[y-a:y+h+a, x-b:x+w+b]
             face = cv2.resize(face, dsize=(224, 224))
         cv2.imshow('face', face)
-        img_file = 'D:/python_work/Cam/face_image/' +time.strftime('%y-%m-%d-%H-%M-%S') +'.jpg'
+        img_file = 'C:/-/Hanium2021/Project_Face_Mask/face_image/' +time.strftime('%y-%m-%d-%H-%M-%S') +'.jpg'
         cv2.imwrite(img_file, face)
     cou += 1
 
